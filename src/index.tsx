@@ -3,15 +3,22 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ThemeProvider from './theme';
+import { Provider as ReduxProvider } from 'react-redux';
+import { store } from './redux/store';
 
 const root = ReactDOM.createRoot(
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	document.getElementById('root')!,
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  document.getElementById('root')!,
 );
 root.render(
-	<React.StrictMode>
-		<App />
-	</React.StrictMode>,
+  <React.StrictMode>
+    <ReduxProvider store={store}>
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    </ReduxProvider>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function
