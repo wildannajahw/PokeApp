@@ -2,6 +2,7 @@ import { pxToRem, responsiveFontSizes } from '../utils/getFontValue';
 
 // ----------------------------------------------------------------------
 
+// eslint-disable-next-line quotes
 const FONT_PRIMARY = "'M PLUS Rounded 1c', sans-serif"; // Google Font
 // const FONT_SECONDARY = 'CircularStd, sans-serif'; // Local Font
 
