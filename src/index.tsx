@@ -6,18 +6,42 @@ import reportWebVitals from './reportWebVitals';
 import ThemeProvider from './theme';
 import { Provider as ReduxProvider } from 'react-redux';
 import { store } from './redux/store';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { offsetLimitPagination } from '@apollo/client/utilities';
+import { BrowserRouter } from 'react-router-dom';
 
+const client = new ApolloClient({
+  uri: 'https://beta.pokeapi.co/graphql/v1beta',
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          pokemon: offsetLimitPagination(),
+        },
+      },
+    },
+  }),
+});
+
+export const typeRelationClient = new ApolloClient({
+  uri: 'https://graphql-pokemon2.vercel.app/',
+  cache: new InMemoryCache(),
+});
 const root = ReactDOM.createRoot(
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   document.getElementById('root')!,
 );
 root.render(
   <React.StrictMode>
-    <ReduxProvider store={store}>
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
-    </ReduxProvider>
+    <ApolloProvider client={client}>
+      <ReduxProvider store={store}>
+        <ThemeProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ThemeProvider>
+      </ReduxProvider>
+    </ApolloProvider>
   </React.StrictMode>,
 );
 
