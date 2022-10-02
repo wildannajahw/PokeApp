@@ -1,4 +1,5 @@
 import { Stack } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { Pokemon } from '../../../api/types';
 import PokeCard from './PokeCard';
 
@@ -7,11 +8,12 @@ interface PokeListProps {
 }
 
 export default function PokeList({ pokemons }: PokeListProps) {
-  console.log(pokemons);
   return (
     <Stack spacing={4}>
       {pokemons.map(({ name, id, pokemon_v2_pokemontypes: types }) => (
-        <PokeCard key={id} name={name} id={id} pokemon_v2_pokemontypes={types}></PokeCard>
+        <Link key={id} to={`pokemon/${name}`}>
+          <PokeCard name={name} id={id} pokemon_v2_pokemontypes={types}></PokeCard>
+        </Link>
       ))}
     </Stack>
   );

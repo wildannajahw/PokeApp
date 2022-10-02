@@ -5,7 +5,7 @@ import { useRoutes } from 'react-router-dom';
 
 // Layouts
 import MainLayout from '../layouts/main';
-// Import PokeLayout from '../layouts/main/PokeLayout';
+import PokeLayout from '../layouts/pokemon/PokeLayout';
 
 // ----------------------------------------------------------------------
 
@@ -29,14 +29,14 @@ export default function Router() {
         // { path: 'faqs', element: <Faqs /> },
       ],
     },
-    // {
-    //   path: 'pokemon',
-    //   element: <PokeLayout />,
-    //   children: [{ path: ':name', element: <PokeDetails /> }],
-    // },
+    {
+      path: 'pokemon',
+      element: <PokeLayout />,
+      children: [{ path: ':name', element: <PokeDetails /> }],
+    },
   ]);
 }
 
 // MAIN
 const HomePage = Loadable(lazy(() => import('../pages/Home')));
-// Const PokeDetails = Loadable(lazy(() => import('../pages/PokeDetails')));
+const PokeDetails = Loadable(lazy(() => import('../pages/PokeDetails')));
