@@ -1,28 +1,61 @@
 import { useQuery } from '@apollo/client';
-import { Box } from '@mui/material';
+import { InputAdornment, Stack, TextField } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { InView } from 'react-intersection-observer';
 import { GET_POKEMONS } from '../api';
 import { Pokemons, PokemonVars } from '../api/types';
+import Iconify from '../components/Iconify';
 import PokeCardLoader from '../sections/Pokemon/Home/PokeCardLoader';
 import PokeList from '../sections/Pokemon/Home/PokeList';
 import uuidv4 from '../utils/uuidv4';
 
 export default function Home() {
-  const { data, fetchMore, error, loading } = useQuery<Pokemons, PokemonVars>(GET_POKEMONS, {
-    notifyOnNetworkStatusChange: true,
-    variables: {
+  const [filter, setFilter] = useState('');
+  const { data, fetchMore, error, loading, refetch } = useQuery<Pokemons, PokemonVars>(
+    GET_POKEMONS,
+    {
+      notifyOnNetworkStatusChange: true,
+      variables: {
+        offset: 0,
+        limit: 20,
+        name: filter,
+      },
+    },
+  );
+  useEffect(() => {
+    refetch({
       offset: 0,
       limit: 20,
-    },
-  });
+      name: `%${filter}%`,
+    });
+  }, [filter]);
   const { pokemon_v2_pokemon: pokemons } = data || {};
   return (
-    <Box
+    <Stack
+      spacing={3}
       sx={{
         paddingBottom: '5em',
       }}
     >
       {error ? <div>error</div> : ''}
+      <TextField
+        id='outlined-basic'
+        variant='outlined'
+        color='success'
+        placeholder='What Pokémon are you looking for?'
+        sx={{
+          borderRadius: '8px',
+          BackgroundColor: (theme) => theme.palette.grey[300],
+        }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position='start'>
+              <Iconify icon={'bi:search'} />
+            </InputAdornment>
+          ),
+        }}
+        onChange={(newValue) => setFilter(newValue.target.value)}
+      />
       {pokemons && <PokeList pokemons={pokemons} />}
       {pokemons && (
         <InView
@@ -54,6 +87,6 @@ export default function Home() {
           const id = uuidv4();
           return <PokeCardLoader key={id} />;
         })}
-    </Box>
+    </Stack>
   );
 }

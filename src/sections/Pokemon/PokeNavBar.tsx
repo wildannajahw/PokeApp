@@ -1,4 +1,4 @@
-import { InputAdornment, Stack, TextField, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import Iconify from '../../components/Iconify';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -11,9 +11,9 @@ export default function PokeNavBar() {
         backgroundImage: 'url("assets/pokeBG2-alt.svg")',
         backgroundRepeat: 'no-repeat',
         backgroundSize: '20rem',
-        backgroundPositionY: '390%',
+        backgroundPositionY: '110%',
         backgroundPositionX: 'center',
-        py: '2rem',
+        py: '1rem',
       }}
       spacing={3}
     >
@@ -53,23 +53,6 @@ export default function PokeNavBar() {
         >
           Search for Pokémon by name or using the National Pokédex Number
         </Typography>
-        <TextField
-          id='outlined-basic'
-          variant='outlined'
-          color='success'
-          placeholder='What Pokémon are you looking for?'
-          sx={{
-            borderRadius: '8px',
-            BackgroundColor: (theme) => theme.palette.grey[300],
-          }}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position='start'>
-                <Iconify icon={'bi:search'} />
-              </InputAdornment>
-            ),
-          }}
-        />
       </Stack>
     </Stack>
   );
