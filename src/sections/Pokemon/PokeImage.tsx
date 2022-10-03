@@ -7,7 +7,7 @@ interface PokeImageProps {
 export default function PokeImage({ id }: PokeImageProps) {
   const { pathname } = useLocation();
 
-  const isHome = pathname === '/';
+  const isHome = pathname === '/' || pathname === '/my-pokemon';
   const PNG_URL =
     'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/';
   return (

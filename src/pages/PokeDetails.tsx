@@ -9,6 +9,7 @@ import { Pokemons, PokemonVars, TypeRelation } from '../api/types';
 import Iconify from '../components/Iconify';
 import BadgeType from '../sections/Pokemon/BadgeType';
 import PokeAbout from '../sections/Pokemon/Details/PokeAbout';
+import PokeButton from '../sections/Pokemon/Details/PokeButton';
 import PokeData from '../sections/Pokemon/Details/PokeData';
 import PokeMoves from '../sections/Pokemon/Details/PokeMoves';
 import PokeStats from '../sections/Pokemon/Details/PokeStats';
@@ -145,6 +146,7 @@ export default function PokeDetails() {
         sx={{
           backgroundColor: 'background.default',
           p: '2rem',
+          pb: '7rem',
         }}
       >
         {flavorText && <PokeAbout flavorText={flavorText} />}
@@ -162,6 +164,7 @@ export default function PokeDetails() {
 
         <PokeStats stats={stats} firstType={firstType} />
         <PokeMoves moves={moves} />
+        {name && <PokeButton id={id} name={name} pokemon_v2_pokemontypes={pokeTypes} />}
       </Stack>
     </Box>
   );

@@ -34,7 +34,6 @@ export default function PokeMoves({ moves }: PokeMoveProps) {
                 pokemon_v2_machines: machines,
               } = move;
               const item = machines[machines.length - 1]?.pokemon_v2_item.name;
-              console.log(item);
               const moveType = TYPE[typeID as unknown as keyof typeof TYPE];
               return (
                 <tr key={name} className='hover:bg-slate-50 [&_>_:nth-child(n_+_3)]:text-center'>

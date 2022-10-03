@@ -78,6 +78,7 @@ export interface TypeRelation {
 export interface Pokemon {
   name: string;
   id: string;
+  nickname?: string;
   height?: string;
   weight?: string;
   pokemon_v2_pokemontypes: Type[];

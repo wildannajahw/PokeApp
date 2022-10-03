@@ -24,6 +24,7 @@ export default function Router() {
       element: <MainLayout />,
       children: [
         { element: <HomePage />, index: true },
+        { path: 'my-pokemon', element: <MyPokemon /> },
         // { path: 'about-us', element: <About /> },
         // { path: 'contact-us', element: <Contact /> },
         // { path: 'faqs', element: <Faqs /> },
@@ -40,3 +41,4 @@ export default function Router() {
 // MAIN
 const HomePage = Loadable(lazy(() => import('../pages/Home')));
 const PokeDetails = Loadable(lazy(() => import('../pages/PokeDetails')));
+const MyPokemon = Loadable(lazy(() => import('../pages/MyPokemon')));

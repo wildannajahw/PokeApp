@@ -9,6 +9,7 @@ import { store } from './redux/store';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { offsetLimitPagination } from '@apollo/client/utilities';
 import { BrowserRouter } from 'react-router-dom';
+import MyPokemonsProvider from './context/MyPokemon';
 
 const client = new ApolloClient({
   uri: 'https://beta.pokeapi.co/graphql/v1beta',
@@ -37,7 +38,9 @@ root.render(
       <ReduxProvider store={store}>
         <ThemeProvider>
           <BrowserRouter>
-            <App />
+            <MyPokemonsProvider>
+              <App />
+            </MyPokemonsProvider>
           </BrowserRouter>
         </ThemeProvider>
       </ReduxProvider>

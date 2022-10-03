@@ -1,6 +1,12 @@
-import { Skeleton, Stack } from '@mui/material';
-import { Card } from './PokeCard';
-
+import { Skeleton, Stack, styled } from '@mui/material';
+export const Card = styled('div')(({ theme }) => ({
+  position: 'relative',
+  boxShadow: theme.shadows[5],
+  borderRadius: '8px',
+  display: 'flex',
+  minHeight: '100px',
+  alignItems: 'center',
+}));
 export default function PokeCardLoader() {
   return (
     <Card
