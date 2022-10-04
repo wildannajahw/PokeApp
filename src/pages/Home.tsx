@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 import { InputAdornment, Stack, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { InView } from 'react-intersection-observer';
-import { coba } from '../api';
+import { getPokemons } from '../api';
 import { Pokemons, PokemonVars } from '../api/types';
 import Iconify from '../components/Iconify';
 import PokeCardLoader from '../sections/Pokemon/Home/PokeCardLoader';
@@ -13,7 +13,7 @@ export default function Home() {
   const [name, setName] = useState('');
   const filter = {};
   const { data, fetchMore, error, loading, refetch } = useQuery<Pokemons, PokemonVars>(
-    coba(filter),
+    getPokemons(filter),
     {
       notifyOnNetworkStatusChange: true,
       variables: {

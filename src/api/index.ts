@@ -5,7 +5,7 @@ type PokemonVars = {
   gen?: number;
 };
 
-export const coba = ({ type, gen }: PokemonVars) => gql`
+export const getPokemons = ({ type, gen }: PokemonVars) => gql`
   query pokemons($limit: Int, $offset: Int, $name: String) {
     pokemon_v2_pokemon(
       limit: $limit, 
