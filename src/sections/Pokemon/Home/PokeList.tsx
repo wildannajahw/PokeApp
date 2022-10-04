@@ -1,4 +1,4 @@
-import { Stack } from '@mui/material';
+import { Grid } from '@mui/material';
 import { Pokemon } from '../../../api/types';
 import PokeCard from './PokeCard';
 
@@ -8,15 +8,12 @@ interface PokeListProps {
 
 export default function PokeList({ pokemons }: PokeListProps) {
   return (
-    <Stack spacing={4}>
+    <Grid container spacing={4}>
       {pokemons.map(({ name, id, pokemon_v2_pokemontypes: types, nickname }) => (
-        <PokeCard
-          key={id}
-          name={nickname ? nickname : name}
-          id={id}
-          pokemon_v2_pokemontypes={types}
-        ></PokeCard>
+        <Grid key={id} item xs={12} sm={6}>
+          <PokeCard name={nickname ? nickname : name} id={id} pokemon_v2_pokemontypes={types} />
+        </Grid>
       ))}
-    </Stack>
+    </Grid>
   );
 }

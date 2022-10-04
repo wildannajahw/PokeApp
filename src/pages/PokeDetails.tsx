@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Grid, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { InView } from 'react-intersection-observer';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -150,19 +150,24 @@ export default function PokeDetails() {
         }}
       >
         {flavorText && <PokeAbout flavorText={flavorText} />}
+        <Grid container>
+          <Grid item xs={12} sm={6}>
+            {typeRelation && (
+              <PokeData
+                genus={genus}
+                weight={weight}
+                height={height}
+                abilities={pokeAbilities}
+                firstType={firstType}
+                typeRelation={typeRelation}
+              />
+            )}
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <PokeStats stats={stats} firstType={firstType} />
+          </Grid>
+        </Grid>
 
-        {typeRelation && (
-          <PokeData
-            genus={genus}
-            weight={weight}
-            height={height}
-            abilities={pokeAbilities}
-            firstType={firstType}
-            typeRelation={typeRelation}
-          />
-        )}
-
-        <PokeStats stats={stats} firstType={firstType} />
         <PokeMoves moves={moves} />
         {name && <PokeButton id={id} name={name} pokemon_v2_pokemontypes={pokeTypes} />}
       </Stack>

@@ -33,7 +33,7 @@ export default function PokeStats({ stats, firstType }: PokeStatsProps) {
 
             return (
               <Grid container key={statName}>
-                <Grid item xs={4}>
+                <Grid item xs={4} sm={3}>
                   <Typography className='capitalize'>{newStatName}</Typography>
                 </Grid>
                 <Grid item xs={8}>
@@ -59,7 +59,7 @@ export default function PokeStats({ stats, firstType }: PokeStatsProps) {
             );
           })}
         <Grid container>
-          <Grid item xs={4}>
+          <Grid item xs={4} sm={3}>
             Total
           </Grid>
           <Grid item xs={8}>
