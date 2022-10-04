@@ -2,8 +2,9 @@ import { Stack, styled, Typography } from '@mui/material';
 import { Pokemon } from '../../../api/types';
 import BadgeType from '../BadgeType';
 import PokeImage from '../PokeImage';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Iconify from '../../../components/Iconify';
+import { useMyPokemons } from '../../../hooks/useMypokemons';
 
 export const Card = styled('div')(() => ({
   position: 'relative',
@@ -20,6 +21,7 @@ export const CardContainer = styled('div')(({ theme }) => ({
 }));
 
 export default function PokeCard({ name, id, pokemon_v2_pokemontypes: pokemonTypes }: Pokemon) {
+  const { setMyPokemons } = useMyPokemons();
   const { pathname } = useLocation();
   const isMyPokemon = pathname === '/my-pokemon';
   const types = pokemonTypes.map(
@@ -28,36 +30,50 @@ export default function PokeCard({ name, id, pokemon_v2_pokemontypes: pokemonTyp
   const [firstType] = types;
   return (
     <CardContainer>
-      <Card
-        sx={{
-          backgroundColor: `pokemon.background.${firstType?.toLocaleLowerCase()}`,
-          backgroundImage: 'url("assets/pokeBG2.svg"), url("assets/pokeBG.svg")',
-          backgroundRepeat: 'no-repeat, no-repeat',
-          backgroundPosition: 'right, 30% 0%',
-        }}
-      >
+      <Link to={`pokemon/${name}`}>
+        <Card
+          sx={{
+            backgroundColor: `pokemon.background.${firstType?.toLocaleLowerCase()}`,
+            backgroundImage: 'url("assets/pokeBG2.svg"), url("assets/pokeBG.svg")',
+            backgroundRepeat: 'no-repeat, no-repeat',
+            backgroundPosition: 'right, 30% 0%',
+          }}
+        >
+          <Stack
+            direction={'row'}
+            alignItems='center'
+            width={'100%'}
+            justifyContent={'space-between'}
+            px={'1rem'}
+          >
+            <Stack spacing={1}>
+              <Typography variant='h3' color={'#fff'} className={'capitalize'}>
+                {name}
+              </Typography>
+              <Stack direction={'row'} spacing={1}>
+                {types.map((type) => (
+                  <BadgeType key={type} type={type} />
+                ))}
+              </Stack>
+            </Stack>
+            <PokeImage id={id} />
+          </Stack>
+        </Card>
+      </Link>
+
+      {isMyPokemon && (
         <Stack
           direction={'row'}
-          alignItems='center'
-          width={'100%'}
-          justifyContent={'space-between'}
+          fontSize={'24px'}
+          p={'0.3rem'}
           px={'1rem'}
+          onClick={() => {
+            // eslint-disable-next-line no-alert
+            if (window.confirm(`Are you sure you want to release ${name}?`)) {
+              setMyPokemons((prev) => prev?.filter((pokemon) => pokemon.id !== id));
+            }
+          }}
         >
-          <Stack spacing={1}>
-            <Typography variant='h3' color={'#fff'} className={'capitalize'}>
-              {name}
-            </Typography>
-            <Stack direction={'row'} spacing={1}>
-              {types.map((type) => (
-                <BadgeType key={type} type={type} />
-              ))}
-            </Stack>
-          </Stack>
-          <PokeImage id={id} />
-        </Stack>
-      </Card>
-      {isMyPokemon && (
-        <Stack direction={'row'} fontSize={'24px'} p={'0.3rem'} px={'1rem'}>
           <Iconify icon={'akar-icons:trash-can'} />
           <Typography>Release</Typography>
         </Stack>

@@ -10,8 +10,9 @@ import {
 import { useState } from 'react';
 import { Pokemon } from '../../../api/types';
 import { useMyPokemons } from '../../../hooks/useMypokemons';
+import uuidv4 from '../../../utils/uuidv4';
 
-export default function PokeButton({ id, name, pokemon_v2_pokemontypes: PokeTypes }: Pokemon) {
+export default function PokeButton({ name, pokemon_v2_pokemontypes: PokeTypes }: Pokemon) {
   const { setMyPokemons } = useMyPokemons();
   const [catched, setCatch] = useState(false);
   const [nickname, setNickname] = useState('');
@@ -29,9 +30,9 @@ export default function PokeButton({ id, name, pokemon_v2_pokemontypes: PokeType
 
   const handleSubmit = () => {
     setOpen(false);
-    setMyPokemons((prev) => {
+    setMyPokemons((prev: Pokemon[]) => {
       const newPokemon: Pokemon = {
-        id,
+        id: uuidv4(),
         name,
         // eslint-disable-next-line camelcase
         pokemon_v2_pokemontypes: PokeTypes,
