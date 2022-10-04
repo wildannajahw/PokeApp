@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 import { InputAdornment, Stack, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { InView } from 'react-intersection-observer';
-import { GET_POKEMONS } from '../api';
+import { coba } from '../api';
 import { Pokemons, PokemonVars } from '../api/types';
 import Iconify from '../components/Iconify';
 import PokeCardLoader from '../sections/Pokemon/Home/PokeCardLoader';
@@ -10,15 +10,16 @@ import PokeList from '../sections/Pokemon/Home/PokeList';
 import uuidv4 from '../utils/uuidv4';
 
 export default function Home() {
-  const [filter, setFilter] = useState('');
+  const [name, setName] = useState('');
+  const filter = {};
   const { data, fetchMore, error, loading, refetch } = useQuery<Pokemons, PokemonVars>(
-    GET_POKEMONS,
+    coba(filter),
     {
       notifyOnNetworkStatusChange: true,
       variables: {
         offset: 0,
         limit: 20,
-        name: filter,
+        name,
       },
     },
   );
@@ -26,9 +27,9 @@ export default function Home() {
     refetch({
       offset: 0,
       limit: 20,
-      name: `%${filter}%`,
+      name: `%${name}%`,
     });
-  }, [filter]);
+  }, [name]);
   const { pokemon_v2_pokemon: pokemons } = data || {};
   return (
     <Stack
@@ -54,7 +55,7 @@ export default function Home() {
             </InputAdornment>
           ),
         }}
-        onChange={(newValue) => setFilter(newValue.target.value)}
+        onChange={(newValue) => setName(newValue.target.value)}
       />
       {pokemons && <PokeList pokemons={pokemons} />}
       {pokemons && (

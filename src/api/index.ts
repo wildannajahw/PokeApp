@@ -1,5 +1,35 @@
 import { gql } from '@apollo/client';
 
+type PokemonVars = {
+  type?: string;
+  gen?: number;
+};
+
+export const coba = ({ type, gen }: PokemonVars) => gql`
+  query pokemons($limit: Int, $offset: Int, $name: String) {
+    pokemon_v2_pokemon(
+      limit: $limit, 
+      offset: $offset,
+      where: {
+        name: { _like: $name }
+        ${type ? `pokemon_v2_pokemontypes : { pokemon_v2_type: { name: { _eq: "${type}" } } }` : ''}
+        ${gen ? `pokemon_v2_pokemonspecy: {generation_id: {_eq: "${gen}"}}` : ''}
+       
+        
+      }
+      order_by: {id: asc}
+    ) {
+      name
+      id
+      pokemon_v2_pokemontypes {
+        pokemon_v2_type {
+          name
+        }
+      }
+    }
+  }
+`;
+
 export const GET_POKEMONS = gql`
   query pokemons($limit: Int, $offset: Int, $name: String) {
     pokemon_v2_pokemon(limit: $limit, offset: $offset, where: { name: { _like: $name } }) {
