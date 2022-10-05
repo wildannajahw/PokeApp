@@ -12,7 +12,8 @@ export default function PokeList({ pokemons }: PokeListProps) {
       {pokemons.map(({ name, id, pokemon_v2_pokemontypes: types, nickname }) => (
         <PokeCard
           key={id}
-          name={nickname ? nickname : name}
+          name={name}
+          nickname={nickname}
           id={id}
           pokemon_v2_pokemontypes={types}
         />

@@ -24,6 +24,7 @@ export default function PokeCard({
   name,
   id,
   uuidv4,
+  nickname,
   pokemon_v2_pokemontypes: pokemonTypes,
 }: Pokemon) {
   const { setMyPokemons } = useMyPokemons();
@@ -35,7 +36,7 @@ export default function PokeCard({
   const [firstType] = types;
   return (
     <CardContainer>
-      <Link to={`pokemon/${name}`}>
+      <Link to={`/pokemon/${name}`}>
         <Card
           sx={{
             backgroundColor: `pokemon.background.${firstType?.toLocaleLowerCase()}`,
@@ -53,7 +54,7 @@ export default function PokeCard({
           >
             <Stack spacing={1}>
               <Typography variant='h3' color={'#fff'} className={'capitalize'}>
-                {name}
+                {nickname ? nickname : name}
               </Typography>
               <Stack direction={'row'} spacing={1}>
                 {types.map((type) => (
