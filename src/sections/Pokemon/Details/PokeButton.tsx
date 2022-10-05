@@ -4,7 +4,6 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle,
   TextField,
 } from '@mui/material';
 import { useState } from 'react';
@@ -52,19 +51,20 @@ export default function PokeButton({ name, pokemon_v2_pokemontypes: PokeTypes }:
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Catching Pokemon</DialogTitle>
         <DialogContent>
           <DialogContentText>{message}</DialogContentText>
-          <TextField
-            autoFocus
-            margin='dense'
-            id='name'
-            label='Pokemon Name'
-            type='text'
-            fullWidth
-            variant='standard'
-            onChange={(newValue) => setNickname(newValue.target.value)}
-          />
+          {catched && (
+            <TextField
+              autoFocus
+              margin='dense'
+              id='name'
+              label='Enter Pokemon Name'
+              type='text'
+              fullWidth
+              variant='standard'
+              onChange={(newValue) => setNickname(newValue.target.value)}
+            />
+          )}
         </DialogContent>
         <DialogActions>{catched && <Button onClick={handleSubmit}>Submit</Button>}</DialogActions>
       </Dialog>
