@@ -55,7 +55,7 @@ export default function Home() {
             </InputAdornment>
           ),
         }}
-        onChange={(newValue) => setName(newValue.target.value)}
+        onChange={(newValue) => setName(newValue.target.value.toLowerCase())}
       />
       {pokemons && <PokeList pokemons={pokemons} />}
       {pokemons && (
