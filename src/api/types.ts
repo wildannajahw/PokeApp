@@ -78,6 +78,7 @@ export interface TypeRelation {
 export interface Pokemon {
   name: string;
   id: string;
+  uuidv4: string;
   nickname?: string;
   height?: string;
   weight?: string;

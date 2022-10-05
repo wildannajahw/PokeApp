@@ -11,7 +11,7 @@ import { Pokemon } from '../../../api/types';
 import { useMyPokemons } from '../../../hooks/useMypokemons';
 import uuidv4 from '../../../utils/uuidv4';
 
-export default function PokeButton({ name, pokemon_v2_pokemontypes: PokeTypes }: Pokemon) {
+export default function PokeButton({ id, name, pokemon_v2_pokemontypes: PokeTypes }: Pokemon) {
   const { setMyPokemons } = useMyPokemons();
   const [catched, setCatch] = useState(false);
   const [nickname, setNickname] = useState('');
@@ -31,7 +31,8 @@ export default function PokeButton({ name, pokemon_v2_pokemontypes: PokeTypes }:
     setOpen(false);
     setMyPokemons((prev: Pokemon[]) => {
       const newPokemon: Pokemon = {
-        id: uuidv4(),
+        id,
+        uuidv4: uuidv4(),
         name,
         // eslint-disable-next-line camelcase
         pokemon_v2_pokemontypes: PokeTypes,
