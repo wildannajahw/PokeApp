@@ -33,6 +33,7 @@ export default function PokeCard({
   const types = pokemonTypes.map(
     (item: { pokemon_v2_type: { name: string } }) => item.pokemon_v2_type?.name,
   );
+  console.log(uuidv4);
   const [firstType] = types;
   return (
     <CardContainer>
