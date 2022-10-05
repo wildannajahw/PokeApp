@@ -20,7 +20,12 @@ export const CardContainer = styled('div')(({ theme }) => ({
   borderRadius: '8px',
 }));
 
-export default function PokeCard({ name, id, pokemon_v2_pokemontypes: pokemonTypes }: Pokemon) {
+export default function PokeCard({
+  name,
+  id,
+  uuidv4,
+  pokemon_v2_pokemontypes: pokemonTypes,
+}: Pokemon) {
   const { setMyPokemons } = useMyPokemons();
   const { pathname } = useLocation();
   const isMyPokemon = pathname === '/my-pokemon';
@@ -70,7 +75,7 @@ export default function PokeCard({ name, id, pokemon_v2_pokemontypes: pokemonTyp
           onClick={() => {
             // eslint-disable-next-line no-alert
             if (window.confirm(`Are you sure you want to release ${name}?`)) {
-              setMyPokemons((prev) => prev?.filter((pokemon) => pokemon.id !== id));
+              setMyPokemons((prev) => prev?.filter((pokemon) => pokemon.uuidv4 !== uuidv4));
             }
           }}
         >
